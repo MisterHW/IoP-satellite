@@ -37,7 +37,7 @@ function demo_thread_profile() = [
 ];
 
 // PCO-1881 soda bottle cap thread (estimated from bottle thread dims)
-function pco1881_nut_thread_dia()     = 27.2; // bottle thread 27.4 mm outside
+function pco1881_nut_thread_dia()     = 27.4; 
 function pco1881_nut_thread_pitch()   = 2.7;
 function pco1881_nut_thread_profile() = [
     [0,0],
@@ -45,3 +45,19 @@ function pco1881_nut_thread_profile() = [
     [-1.15,1.22],
     [0,1.42]
 ];
+
+// PCO-1881 soda bottle neck thread
+function pco1881_neck_bore() = 21.74;
+function pco1881_neck_thread_dia()     = 24.94;
+function pco1881_neck_thread_pitch()   = 2.7;
+function pco1881_neck_thread_profile() = [
+    [0,0],
+    [0,1.42],
+    [1.15,1.22],
+	[1.15,0.22] 
+];
+
+// 48-41 bottle thread for 3-5L jugs
+function bottle_4841_neck_bore() = 41;
+function bottle_4841_neck_dia()  = 45;
+
