@@ -57,7 +57,26 @@ function pco1881_neck_thread_profile() = [
 	[1.15,0.22] 
 ];
 
+
+// 48-41 bottle cap thread (estimated from bottle thread dims)
+function bottle_4841_nut_thread_dia() = 48;
+function bottle_4841_nut_thread_pitch() = 3.3;
+function bottle_4841_nut_thread_profile() = [
+    [0,0],
+    [0,1.5],
+    [-1,1.25],
+	[-1,1]
+];
+
+
 // 48-41 bottle thread for 3-5L jugs
 function bottle_4841_neck_bore() = 41;
 function bottle_4841_neck_dia()  = 45;
+function bottle_4841_neck_thread_pitch() = 3.3;
+function bottle_4841_neck_thread_profile() = [
+    [0,0],
+	[1.35,0.4],
+	[1.35,0.7],
+	[0,1.5]
+];
 

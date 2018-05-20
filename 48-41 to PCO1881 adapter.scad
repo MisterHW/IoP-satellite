@@ -1,7 +1,7 @@
 use <thread_profile.scad>
 use <azimuthal_profile.scad>
 
-$fn = 4*60;
+$fn = 4*3*32;
 
 bottle_ID = bottle_4841_neck_bore();
 threaded_section_height = 22;
@@ -104,6 +104,7 @@ union()
         fn=$fn, 
         r=bottle_4841_nut_thread_dia()/2 +mean_wall_thickness
     );
+
     translate([0,0,11-2/2])
     rotate_extrude()
     polygon(points=[
@@ -127,7 +128,8 @@ union()
 }
 }
 
-
+//// demo:
+/*
 difference(){
     union()
     {
@@ -140,5 +142,12 @@ difference(){
     translate([0,0,-100])
         cube([100,100,200]);
 }
+//*/
 
+
+//// individual parts for export:
+
+ adapter_4841_swivel_nut();
+// adapter_insert(); 
+// flanged_nut();
 
