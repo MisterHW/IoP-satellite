@@ -1,7 +1,7 @@
 use <thread_profile.scad>
 use <azimuthal_profile.scad>
 
-$fn = 4*3*32;
+$fn = 4*3*16; // 4*3*60 for high res
 
 bottle_ID = bottle_4841_neck_bore();
 threaded_section_height = 22;
@@ -77,8 +77,8 @@ union()
     straight_thread(
         section_profile = pco1881_nut_thread_profile(),
         higbee_arc = 10,
-        r     = pco1881_nut_thread_dia()/2,
-        turns = 11 / pco1881_nut_thread_pitch()-0.5,
+        r     = pco1881_nut_thread_dia()/2+0.05,
+        turns = 11 / pco1881_nut_thread_pitch()-0.6,
         pitch = pco1881_nut_thread_pitch(),
         fn    = $fn
     ); 
@@ -119,7 +119,7 @@ union()
     translate([0,0,1])
     straight_thread(
         section_profile = bottle_4841_nut_thread_profile(),
-        r = bottle_4841_nut_thread_dia()/2,
+        r = bottle_4841_nut_thread_dia()/2+0.05,
         pitch = bottle_4841_nut_thread_pitch()*3,
         turns = 0.45,
         higbee_arc = 10,
@@ -147,7 +147,7 @@ difference(){
 
 //// individual parts for export:
 
- adapter_4841_swivel_nut();
+rotate([0,180,0]) adapter_4841_swivel_nut();
 // adapter_insert(); 
 // flanged_nut();
 

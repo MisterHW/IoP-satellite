@@ -37,12 +37,12 @@ function demo_thread_profile() = [
 ];
 
 // PCO-1881 soda bottle cap thread (estimated from bottle thread dims)
-function pco1881_nut_thread_dia()     = 27.4; 
+function pco1881_nut_thread_dia()     = 27.8; 
 function pco1881_nut_thread_pitch()   = 2.7;
 function pco1881_nut_thread_profile() = [
     [0,0],
-    [-1.15,0.22],
-    [-1.15,1.22],
+    [-1.15,0.32],
+    [-1.15,1.12],
     [0,1.42]
 ];
 
