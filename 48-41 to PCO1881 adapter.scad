@@ -1,10 +1,13 @@
 use <thread_profile.scad>
 use <azimuthal_profile.scad>
 
-$fn = 4*3*16; // 4*3*60 for high res
+$fn = 4*3*30; // 4*3*60 for high res
+epsilon = 0.05;
 
 bottle_ID = bottle_4841_neck_bore();
 threaded_section_height = 22;
+swvnut_neck_insertion = 12.5;
+
 
 module adapter_insert()
 {
@@ -16,7 +19,7 @@ difference()
         section_profile = pco1881_neck_thread_profile(),
         pitch = pco1881_neck_thread_pitch(),
         turns = threaded_section_height / pco1881_neck_thread_pitch() - 0.5,
-        r = pco1881_neck_thread_dia()/2,
+        r = pco1881_neck_thread_dia()/2-epsilon,
         higbee_arc = 10,
         fn = $fn
         );
@@ -77,7 +80,7 @@ union()
     straight_thread(
         section_profile = pco1881_nut_thread_profile(),
         higbee_arc = 10,
-        r     = pco1881_nut_thread_dia()/2+0.05,
+        r     = pco1881_nut_thread_dia()/2+epsilon,
         turns = 11 / pco1881_nut_thread_pitch()-0.6,
         pitch = pco1881_nut_thread_pitch(),
         fn    = $fn
@@ -98,14 +101,14 @@ union()
                         angle = 360, 
                         fn = $fn,
                         offset = mean_wall_thickness,
-                        height=11
+                        h=swvnut_neck_insertion
                     ),
         angle=360, 
         fn=$fn, 
         r=bottle_4841_nut_thread_dia()/2 +mean_wall_thickness
     );
 
-    translate([0,0,11-2/2])
+    translate([0,0,swvnut_neck_insertion-2])
     rotate_extrude()
     polygon(points=[
         [pco1881_nut_thread_dia()/2+4, 0],
@@ -119,7 +122,7 @@ union()
     translate([0,0,1])
     straight_thread(
         section_profile = bottle_4841_nut_thread_profile(),
-        r = bottle_4841_nut_thread_dia()/2+0.05,
+        r = bottle_4841_nut_thread_dia()/2+epsilon,
         pitch = bottle_4841_nut_thread_pitch()*3,
         turns = 0.45,
         higbee_arc = 10,
@@ -136,7 +139,7 @@ difference(){
         rotate([0,0,180])
             flanged_nut();
         adapter_insert(); 
-        translate([0,0,-12+1.5+2+0.2])
+        translate([0,0,-swvnut_neck_insertion+1.5+2+0.2])
             adapter_4841_swivel_nut();
     }
     translate([0,0,-100])
