@@ -4,7 +4,7 @@ use <azimuthal_profile.scad>
 $fn = 4*3*30; // 4*3*60 for high res
 epsilon = 0.05;
 
-bottle_ID = bottle_4841_neck_bore();
+bottle_ID = bottle_4841_neck_clear_dia();
 threaded_section_height = 22;
 swvnut_neck_insertion = 12.5;
 
@@ -16,15 +16,15 @@ difference()
     union()
     {
     straight_thread(
-        section_profile = pco1881_neck_thread_profile(),
-        pitch = pco1881_neck_thread_pitch(),
-        turns = threaded_section_height / pco1881_neck_thread_pitch() - 0.5,
-        r = pco1881_neck_thread_dia()/2-epsilon,
+        section_profile = bottle_pco1881_neck_thread_profile(),
+        pitch = bottle_pco1881_neck_thread_pitch(),
+        turns = threaded_section_height / bottle_pco1881_neck_thread_pitch() - 0.5,
+        r = bottle_pco1881_neck_thread_dia()/2-epsilon,
         higbee_arc = 10,
         fn = $fn
         );
     cylinder(
-            r = pco1881_neck_thread_dia()/2,
+            r = bottle_pco1881_neck_thread_dia()/2,
             h = threaded_section_height
         );
     translate([0,0,-2]){
@@ -45,7 +45,7 @@ difference()
     union()
     {
     cylinder(
-        r = pco1881_neck_bore()/2-1.5, 
+        r = bottle_pco1881_neck_clear_dia()/2-1.5, 
         h = 100, 
         center = true
         );
@@ -55,7 +55,7 @@ difference()
             [5,-10],
             [bottle_ID/2-4, 0],
             [bottle_ID/2-4, 5],
-            [pco1881_neck_bore()/2-1.5, 9],
+            [bottle_pco1881_neck_clear_dia()/2-1.5, 9],
             [5,9]
         ]);
     }
@@ -68,21 +68,21 @@ union()
 {
     rotate_extrude()
         polygon(points=[
-        [pco1881_nut_thread_dia()/2, 0],
-        [bottle_4841_neck_dia()/2, 0],
-        [bottle_4841_neck_dia()/2, 1.5],
-        [pco1881_nut_thread_dia()/2 + 3.5, 1.5],
-        [pco1881_nut_thread_dia()/2 + 2, 3],
-        [pco1881_nut_thread_dia()/2 + 2, 10],
-        [pco1881_nut_thread_dia()/2 + 1, 11],
-        [pco1881_nut_thread_dia()/2, 11],
+        [bottle_pco1881_nut_thread_major()/2, 0],
+        [bottle_4841_neck_thread_minor()/2, 0],
+        [bottle_4841_neck_thread_minor()/2, 1.5],
+        [bottle_pco1881_nut_thread_major()/2 + 3.5, 1.5],
+        [bottle_pco1881_nut_thread_major()/2 + 2, 3],
+        [bottle_pco1881_nut_thread_major()/2 + 2, 10],
+        [bottle_pco1881_nut_thread_major()/2 + 1, 11],
+        [bottle_pco1881_nut_thread_major()/2, 11],
         ]);
     straight_thread(
-        section_profile = pco1881_nut_thread_profile(),
+        section_profile = bottle_pco1881_nut_thread_profile(),
         higbee_arc = 10,
-        r     = pco1881_nut_thread_dia()/2+epsilon,
-        turns = 11 / pco1881_nut_thread_pitch()-0.6,
-        pitch = pco1881_nut_thread_pitch(),
+        r     = bottle_pco1881_nut_thread_major()/2+epsilon,
+        turns = 11 / bottle_pco1881_nut_thread_pitch()-0.6,
+        pitch = bottle_pco1881_nut_thread_pitch(),
         fn    = $fn
     ); 
 }
@@ -105,24 +105,24 @@ union()
                     ),
         angle=360, 
         fn=$fn, 
-        r=bottle_4841_nut_thread_dia()/2 +mean_wall_thickness
+        r=bottle_4841_nut_thread_major()/2 +mean_wall_thickness
     );
 
     translate([0,0,swvnut_neck_insertion-2])
     rotate_extrude()
     polygon(points=[
-        [pco1881_nut_thread_dia()/2+4, 0],
-        [bottle_4841_nut_thread_dia()/2-1, 0],
-        [bottle_4841_nut_thread_dia()/2, -1],
-        [bottle_4841_nut_thread_dia()/2, 2],
-        [pco1881_nut_thread_dia()/2+4, 2]
+        [bottle_pco1881_nut_thread_major()/2+4, 0],
+        [bottle_4841_nut_thread_major()/2-1, 0],
+        [bottle_4841_nut_thread_major()/2, -1],
+        [bottle_4841_nut_thread_major()/2, 2],
+        [bottle_pco1881_nut_thread_major()/2+4, 2]
     ]);
     for(phi=[0:120:240])
     rotate([0,0,phi])
     translate([0,0,1])
     straight_thread(
         section_profile = bottle_4841_nut_thread_profile(),
-        r = bottle_4841_nut_thread_dia()/2+epsilon,
+        r = bottle_4841_nut_thread_major()/2+epsilon,
         pitch = bottle_4841_nut_thread_pitch()*3,
         turns = 0.45,
         higbee_arc = 10,
@@ -132,7 +132,7 @@ union()
 }
 
 //// demo:
-/*
+//*
 difference(){
     union()
     {
@@ -150,7 +150,7 @@ difference(){
 
 //// individual parts for export:
 
-rotate([0,180,0]) adapter_4841_swivel_nut();
+// rotate([0,180,0]) adapter_4841_swivel_nut();
 // adapter_insert(); 
 // flanged_nut();
 
