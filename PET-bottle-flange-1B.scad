@@ -39,8 +39,8 @@ module inward_gland(){
         [tube_od/2+1.5,-8],
         [tube_od/2+1.5,-2-1],
         [tube_od/2+1.5+1,-2],
-        [pco1881_nut_thread_dia()/2+0.05, -2],
-        [pco1881_nut_thread_dia()/2+0.05, 0]    
+        [bottle_pco1881_nut_thread_major()/2+0.05, -2],
+        [bottle_pco1881_nut_thread_major()/2+0.05, 0]    
     ]);
 }
 
@@ -48,9 +48,9 @@ module inward_gland(){
 module conical_cover() {
     rotate_extrude()
     polygon(points=[
-        [pco1881_nut_thread_dia()/2, 0],
-        [pco1881_nut_thread_dia()/2+1, 0],
-        [pco1881_nut_thread_dia()/2+1, 1],
+        [bottle_pco1881_nut_thread_major()/2, 0],
+        [bottle_pco1881_nut_thread_major()/2+1, 0],
+        [bottle_pco1881_nut_thread_major()/2+1, 1],
         [tube_od/2+2, 10],
         [tube_od/2+2, 10 + 3],
         [tube_od/2, 10 + 3],
@@ -62,17 +62,17 @@ module conical_cover() {
 rotate([0,180,0])
 union(){
 straight_thread(
-    section_profile = pco1881_nut_thread_profile(),
+    section_profile = bottle_pco1881_nut_thread_profile(),
     higbee_arc = 20,
-    r     = pco1881_nut_thread_dia()/2,
+    r     = bottle_pco1881_nut_thread_major()/2,
     turns = nut_turns,
-    pitch = pco1881_nut_thread_pitch(),
+    pitch = bottle_pco1881_nut_thread_pitch(),
     fn    = $fn
 );    
 difference(){
     center_support_solid();
     union(){
-        cylinder(r=pco1881_nut_thread_dia()/2, h=100, center=true);
+        cylinder(r=bottle_pco1881_nut_thread_major()/2, h=100, center=true);
         for (i=[0:90:270]) 
             rotate([0,0,i]) 
             translate([insert_offset,0,0]) 

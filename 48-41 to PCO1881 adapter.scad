@@ -6,7 +6,7 @@ epsilon = 0.05;
 
 bottle_ID = bottle_4841_neck_clear_dia();
 threaded_section_height = 22;
-swvnut_neck_insertion = 12.5;
+swvnut_total_height = 15;
 
 
 module adapter_insert()
@@ -101,14 +101,14 @@ union()
                         angle = 360, 
                         fn = $fn,
                         offset = mean_wall_thickness,
-                        h=swvnut_neck_insertion
+                        h=swvnut_total_height
                     ),
         angle=360, 
         fn=$fn, 
         r=bottle_4841_nut_thread_major()/2 +mean_wall_thickness
     );
 
-    translate([0,0,swvnut_neck_insertion-2])
+    translate([0,0,swvnut_total_height-2])
     rotate_extrude()
     polygon(points=[
         [bottle_pco1881_nut_thread_major()/2+4, 0],
@@ -139,7 +139,7 @@ difference(){
         rotate([0,0,180])
             flanged_nut();
         adapter_insert(); 
-        translate([0,0,-swvnut_neck_insertion+1.5+2+0.2])
+        translate([0,0,-swvnut_total_height+1.5+2+0.2])
             adapter_4841_swivel_nut();
     }
     translate([0,0,-100])
